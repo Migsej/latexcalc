@@ -8,9 +8,10 @@ number = @{
 fraction = { "\\frac{" ~ number ~ "}{" ~ number ~ "}" }
 
 multiply = { "\\cdot" | "*" }
+plus = { "+" }
+minus = { "-" }
 
 operation = { fraction | multiply }
-
 equation = {(fraction | multiply | number)+ } 
 
 WHITESPACE = _{ " " }
