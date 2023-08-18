@@ -35,8 +35,8 @@ pub fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
 
             let bla2 = inner_rules.next().unwrap();
 
-            let mut first = handlerule(bla1)?;
-            let mut last = handlerule(bla2)?;
+            let mut first = handleparsed(bla1)?;
+            let mut last = handleparsed(bla2)?;
 
 
             ops.push(Operation::OpenParenthesis);
@@ -80,8 +80,8 @@ mod tests {
 
     #[test]
     fn parse_simple() -> Result<()> {
-        let latex = r"2*\frac{2}{2}".to_string();
-        let out = vec![Operation::Number(2.0), Operation::Multiply, Operation::OpenParenthesis, Operation::Number(2.0), Operation::ClosedParenthesis, Operation::Divide, Operation::OpenParenthesis, Operation::Number(2.0), Operation::ClosedParenthesis];
+        let latex = r"2*\frac{2*2}{2}".to_string();
+        let out = vec![Operation::Number(2.0), Operation::Multiply, Operation::OpenParenthesis, Operation::Number(2.0), Operation::Multiply, Operation::Number(2.0), Operation::ClosedParenthesis, Operation::Divide, Operation::OpenParenthesis, Operation::Number(2.0), Operation::ClosedParenthesis];
         assert_eq!(parse(latex)?, out);
         Ok(())
     }

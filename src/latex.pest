@@ -5,7 +5,7 @@ number = @{
     ~ (^"e" ~ ("+" | "-")? ~ ASCII_DIGIT+)?
 }
 
-fraction = { "\\frac{" ~ number ~ "}{" ~ number ~ "}" }
+fraction = { "\\frac{" ~ equation ~ "}{" ~ equation ~ "}" }
 
 multiply = { "\\cdot" | "*" }
 plus = { "+" }
