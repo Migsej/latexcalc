@@ -1,0 +1,17 @@
+number = @{
+    "-"?
+    ~ ("0" | ASCII_NONZERO_DIGIT ~ ASCII_DIGIT*)
+    ~ ("." ~ ASCII_DIGIT*)?
+    ~ (^"e" ~ ("+" | "-")? ~ ASCII_DIGIT+)?
+}
+
+fraction = { "\\frac{" ~ number ~ "}{" ~ number ~ "}" }
+
+multiply = { "\\cdot" | "*" }
+
+operation = { fraction | multiply }
+
+equation = {(fraction | multiply | number)+ } 
+
+WHITESPACE = _{ " " }
+
