@@ -11,8 +11,10 @@ sqrt = { "\\sqrt{" ~ equation ~ "}" }
 multiply = { "\\cdot" | "*" }
 plus = { "+" }
 minus = { "-" }
+openparen = { "(" }
+closedparen = { ")" }
 
-equation = {(sqrt | fraction | multiply | plus | minus|  number)+ } 
+equation = {(openparen | closedparen | sqrt | fraction | multiply | plus | minus|  number)+ } 
 
 WHITESPACE = _{ " " }
 

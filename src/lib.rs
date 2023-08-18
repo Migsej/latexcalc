@@ -32,6 +32,8 @@ fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
         Rule::multiply => ops.push(Operation::Multiply),
         Rule::plus => ops.push(Operation::Plus),
         Rule::minus => ops.push(Operation::Minus),
+        Rule::openparen => ops.push(Operation::OpenParenthesis),
+        Rule::closedparen => ops.push(Operation::ClosedParenthesis),
         Rule::sqrt => {
             let mut inner_rules = operation.into_inner();
 
