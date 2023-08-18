@@ -17,7 +17,7 @@ exponent = { "^" }
 	
 raised_number = @{
     "-"?
-    ~ (raised_digit ~ ASCII_DIGIT*)
+    ~ (raised_digit ~ raised_digit*)
     ~ ("." ~ raised_digit*)?
 }
 
