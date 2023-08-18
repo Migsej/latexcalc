@@ -18,7 +18,7 @@ pub fn eval(equation: String) -> Result<f64> {
 
 }
 
-pub fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
+fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
     let mut ops = Vec::new();
 
     match operation.as_rule() {
@@ -32,7 +32,21 @@ pub fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
         Rule::multiply => ops.push(Operation::Multiply),
         Rule::plus => ops.push(Operation::Plus),
         Rule::minus => ops.push(Operation::Minus),
-        Rule::fraction => {
+        Rule::sqrt => {
+            let mut inner_rules = operation.into_inner();
+
+            let bla1 = inner_rules.next().unwrap();
+
+
+            let mut first = handleparsed(bla1)?;
+
+            ops.push(Operation::Sqrt);
+            ops.push(Operation::OpenParenthesis);
+            ops.append(&mut first);
+            ops.push(Operation::ClosedParenthesis);
+
+        },
+       Rule::fraction => {
             let mut inner_rules = operation.into_inner();
 
             let bla1 = inner_rules.next().unwrap();
@@ -58,7 +72,7 @@ pub fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
 
 }
 
-pub fn handleparsed(equation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
+fn handleparsed(equation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
 
     let mut ops = Vec::new();
 
@@ -90,6 +104,12 @@ mod tests {
         Ok(())
     }
 
+    #[test]
+    fn evaluate_sqrt() -> Result<()> {
+        let latex = r"\sqrt{4}".to_string();
+        assert_eq!(evaluate(parse(latex)?)?, 2.0);
+        Ok(())
+    }
     #[test]
     fn evaluate_full() -> Result<()> {
         let latex = r"2*\frac{2}{2}".to_string();

@@ -7,12 +7,12 @@ number = @{
 
 fraction = { "\\frac{" ~ equation ~ "}{" ~ equation ~ "}" }
 
+sqrt = { "\\sqrt{" ~ equation ~ "}" }
 multiply = { "\\cdot" | "*" }
 plus = { "+" }
 minus = { "-" }
 
-operation = { fraction | multiply }
-equation = {(fraction | multiply | plus | minus|  number)+ } 
+equation = {(sqrt | fraction | multiply | plus | minus|  number)+ } 
 
 WHITESPACE = _{ " " }
 
