@@ -14,8 +14,16 @@ minus = { "-" }
 openparen = { "(" }
 closedparen = { ")" }
 exponent = { "^" } 
+	
+raised_number = @{
+    "-"?
+    ~ (raised_digit ~ ASCII_DIGIT*)
+    ~ ("." ~ raised_digit*)?
+}
 
-equation = {(exponent | openparen | closedparen | sqrt | fraction | multiply | plus | minus|  number)+ } 
+raised_digit = { "¹" | "²" | "³" | "⁴" | "⁵" | "⁶" | "⁷" | "⁸" | "⁹" | "⁰"  }
+
+equation = {(raised_number | exponent | openparen | closedparen | sqrt | fraction | multiply | plus | minus|  number)+ } 
 
 WHITESPACE = _{ " " }
 

@@ -35,6 +35,11 @@ fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
         Rule::minus => ops.push(Operation::Minus),
         Rule::openparen => ops.push(Operation::OpenParenthesis),
         Rule::closedparen => ops.push(Operation::ClosedParenthesis),
+        Rule::raised_number => {
+            ops.push(Operation::Exponent);
+            let uuuh = parse_raised(operation.as_str())?;
+            ops.push(Operation::Number(uuuh));
+        },
         Rule::sqrt => {
             let mut inner_rules = operation.into_inner();
 
@@ -87,6 +92,23 @@ fn handleparsed(equation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
     Ok(ops)
 }
 
+fn parse_raised(num: &str) -> Result<f64> {
+    Ok(num.chars().map(|x| {
+        match x {
+            '¹' => '1',
+            '²' => '2',
+            '³' => '3',
+            '⁴' => '4',
+            '⁵' => '5',
+            '⁶' => '6',
+            '⁷' => '7',
+            '⁸' => '8',
+            '⁹' => '9',
+            '⁰' => '0',
+            _   => x,
+        }
+        }).collect::<String>().parse::<f64>()?)
+}
 #[cfg(test)]
 mod tests {
     use super::*;
