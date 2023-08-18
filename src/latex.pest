@@ -13,8 +13,9 @@ plus = { "+" }
 minus = { "-" }
 openparen = { "(" }
 closedparen = { ")" }
+exponent = { "^" } 
 
-equation = {(openparen | closedparen | sqrt | fraction | multiply | plus | minus|  number)+ } 
+equation = {(exponent | openparen | closedparen | sqrt | fraction | multiply | plus | minus|  number)+ } 
 
 WHITESPACE = _{ " " }
 

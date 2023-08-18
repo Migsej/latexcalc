@@ -31,6 +31,7 @@ fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
         },
         Rule::multiply => ops.push(Operation::Multiply),
         Rule::plus => ops.push(Operation::Plus),
+        Rule::exponent => ops.push(Operation::Exponent),
         Rule::minus => ops.push(Operation::Minus),
         Rule::openparen => ops.push(Operation::OpenParenthesis),
         Rule::closedparen => ops.push(Operation::ClosedParenthesis),
@@ -102,6 +103,14 @@ mod tests {
     fn parse_simple() -> Result<()> {
         let latex = r"2*\frac{2*2}{2}".to_string();
         let out = vec![Operation::Number(2.0), Operation::Multiply, Operation::OpenParenthesis, Operation::Number(2.0), Operation::Multiply, Operation::Number(2.0), Operation::ClosedParenthesis, Operation::Divide, Operation::OpenParenthesis, Operation::Number(2.0), Operation::ClosedParenthesis];
+        assert_eq!(parse(latex)?, out);
+        Ok(())
+    }
+
+    #[test]
+    fn parse_exponent() -> Result<()> {
+        let latex = "2^2".to_string();
+        let out = vec![Operation::Number(2.0),Operation::Exponent,  Operation::Number(2.0)];
         assert_eq!(parse(latex)?, out);
         Ok(())
     }
