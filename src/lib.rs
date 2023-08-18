@@ -7,9 +7,14 @@ use anyhow::Result;
 #[grammar = "latex.pest"]
 struct LatexParser;
 
-pub fn parse(equation: String) -> Result<f64> {
+pub fn parse(equation: String) -> Result<Vec<Operation>> {
     let parsed = LatexParser::parse(Rule::equation, &equation)?.next().unwrap();
-    evaluate(handleparsed(parsed)?)
+    handleparsed(parsed)
+
+}
+
+pub fn eval(equation: String) -> Result<f64> {
+    evaluate(parse(equation)?)
 
 }
 
