@@ -1,11 +1,16 @@
-use pest::Parser;
-use pest_derive::Parser;
-
-#[derive(Parser)]
-#[grammar = "latex.pest"]
-struct SnitParser;
+use latexcalc::parse;
+use std::io;
 
 fn main() {
-    let success = SnitParser::parse(Rule::fraction, r"\frac{-254}{12}");
-    println!("{:?}", success);
+    loop {
+        let mut equation = String::new();
+        io::stdin().read_line(&mut equation).expect("Failed to read line");
+        let evaluated = parse(equation);
+        match evaluated {
+            Ok(n) => println!("{:?}", n),
+            Err(s) => println!("{}", s),
+        }
+
+    } 
+
 }

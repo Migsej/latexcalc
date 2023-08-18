@@ -12,7 +12,7 @@ plus = { "+" }
 minus = { "-" }
 
 operation = { fraction | multiply }
-equation = {(fraction | multiply | number)+ } 
+equation = {(fraction | multiply | plus | minus|  number)+ } 
 
 WHITESPACE = _{ " " }
 

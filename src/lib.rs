@@ -7,9 +7,9 @@ use anyhow::Result;
 #[grammar = "latex.pest"]
 struct LatexParser;
 
-pub fn parse(equation: String) -> Result<Vec<Operation>> {
+pub fn parse(equation: String) -> Result<f64> {
     let parsed = LatexParser::parse(Rule::equation, &equation)?.next().unwrap();
-    handleparsed(parsed)
+    evaluate(handleparsed(parsed)?)
 
 }
 
@@ -31,7 +31,6 @@ pub fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
             let mut inner_rules = operation.into_inner();
 
             let bla1 = inner_rules.next().unwrap();
-            println!("{}", bla1.clone().into_inner());
 
             let bla2 = inner_rules.next().unwrap();
 
