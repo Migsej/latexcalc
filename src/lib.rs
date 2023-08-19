@@ -149,7 +149,12 @@ mod tests {
         assert_eq!(evaluate(parse(latex)?)?, 2.0);
         Ok(())
     }
-
+    #[test]
+    fn evaluate_full() -> Result<()> {
+        let latex = r"2*\frac{2}{2}".to_string();
+        assert_eq!(evaluate(parse(latex)?)?, 2.0);
+        Ok(())
+    }
 
 
 }
