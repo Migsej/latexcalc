@@ -145,8 +145,10 @@ mod tests {
     }
     #[test]
     fn evaluate_frac() -> Result<()> {
-        let latex = r"2*\frac{-5}{-2}".to_string();
-        assert_eq!(evaluate(parse(latex)?)?, 2.0);
+        let latex = r"\frac{-5}{-2}".to_string();
+        let parsed = parse(latex)?;
+        println!("{:?}", parsed);
+        assert_eq!(evaluate(parsed)?, 2.5);
         Ok(())
     }
     #[test]

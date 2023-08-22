@@ -23,7 +23,7 @@ raised_number = @{
 
 raised_digit = { "¹" | "²" | "³" | "⁴" | "⁵" | "⁶" | "⁷" | "⁸" | "⁹" | "⁰"  }
 
-equation = {(raised_number | exponent | openparen | closedparen | sqrt | fraction | multiply | plus | minus|  number)+ } 
+equation = {(raised_number | exponent | openparen | closedparen | sqrt | fraction | multiply | plus | number | minus  )+ } 
 
 WHITESPACE = _{ " " }
 
