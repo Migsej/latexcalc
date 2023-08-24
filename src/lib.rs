@@ -23,8 +23,12 @@ fn handlerule(operation: Pair<'_, Rule>) -> Result<Vec<Operation>> {
 
     match operation.as_rule() {
         Rule::number =>  {
-            let number: f64 = operation 
+            let numstr: String = operation
                 .as_str()
+                .chars()
+                .map(|x| if x == ',' { '.'} else { x })
+                .collect();
+            let number: f64 = numstr 
                 .parse::<f64>()?;
             ops.push(Operation::Number(number));
 
